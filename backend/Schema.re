@@ -5,15 +5,15 @@ type role =
   | User;
 
 type user = {
-  id: int,
+  id: string,
   name: string,
   role,
 };
 
-let users = [
-  {id: 1, name: "Alice", role: Admin},
-  {id: 2, name: "Bob", role: User},
-];
+/* let users = [ */
+/*   {id: "1", name: "Alice", role: Admin}, */
+/*   {id: "2", name: "Bob", role: User}, */
+/* ]; */
 
 let role: Schema.typ(unit, option(role)) =
   Schema.(
@@ -34,7 +34,7 @@ let user =
         field(
           "id",
           ~doc="Unique user identifier",
-          ~typ=non_null(int),
+          ~typ=non_null(string),
           ~args=Arg.[],
           ~resolve=(_info, p) =>
           p.id
@@ -58,8 +58,19 @@ let schema =
         ~doc="A user",
         ~typ=non_null(list(non_null(user))),
         ~args=Arg.[],
-        ~resolve=(_info, ()) =>
-        [{id: 1, name: "Bob", role: Admin}]
+        ~resolve=(_info, ()) => {
+          let users = Database.get_users();
+
+          users |> List.map(user => {
+            id: user#id,
+            name: user#full_name,
+            role: switch(user#role) {
+            | "ADMIN" => Admin
+            | "USER" => User
+            | _ => User
+            }
+          })
+        }
       ),
     ])
   );

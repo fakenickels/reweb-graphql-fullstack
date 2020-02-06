@@ -1,0 +1,7 @@
+(library
+  (name repository)
+  (flags (-w -40 -w +26))
+  (libraries lwt pgocaml_ppx)
+  (wrapped false)
+  (preprocess (pps lwt_ppx pgocaml_ppx)))
+

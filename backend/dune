@@ -1,5 +1,6 @@
 (executable
   (name App)
+  (package fullstack-reason)
   (public_name App)
-  (libraries lwt re-web shared graphql graphql-lwt)
+  (libraries lwt re-web shared graphql graphql-lwt repository)
   (preprocess (pps lwt_ppx)))

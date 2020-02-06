@@ -12,7 +12,12 @@
       ]
     },
     "buildEnv": {
-      "ODOC_SYNTAX": "re"
+      "ODOC_SYNTAX": "re",
+      "PGHOST": "localhost",
+      "PGUSER": "postgres",
+      "PGDATABASE": "postgres",
+      "PGPASSWORD": "postgres",
+      "PGPORT": "6666"
     }
   },
   "scripts": {
@@ -27,6 +32,8 @@
     "@opam/re-web": "*",
     "@opam/graphql": "*",
     "@opam/graphql-lwt": "*",
+    "@opam/pgocaml": "*",
+    "@opam/pgocaml_ppx": "*",
     "ocaml": "~4.8.1000"
   },
   "devDependencies": {
