@@ -1,0 +1,14 @@
+.bsb.lock
+.DS_Store
+.merlin
+node_modules/
+_build
+_esy
+_release
+*.bs.js
+*.byte
+*.native
+*.install
+dist
+lib
+
