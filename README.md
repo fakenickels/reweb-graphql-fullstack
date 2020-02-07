@@ -10,6 +10,9 @@ This project shows a minimal fullstack
 - Shared business logic used by both of the above
 - GraphQL as a function leveraging ReWeb
 
+## GraphQL
+The GraphQL plug logic can be found at https://github.com/fakenickels/reweb-graphql-fullstack/blob/master/backend/Graphql_reweb.re.
+
 This is a proof-of-concept; you can customize it to your needs.
 
 ## Try it out
