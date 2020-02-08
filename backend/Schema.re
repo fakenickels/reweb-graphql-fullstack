@@ -59,7 +59,7 @@ let schema =
         ~typ=non_null(list(non_null(user))),
         ~args=Arg.[],
         ~resolve=(_info, ()) => {
-          let users = Repository.Database.get_users();
+          let users = Repository.User.findAll();
 
           users |> List.map(user => {
             id: user#id,

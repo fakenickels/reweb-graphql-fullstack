@@ -1,6 +1,6 @@
-let get_users = () => {
+let runWithConnection = (fn) => {
   let connection = PGOCaml.connect();
-  let users = [%pgsql.object connection("select * from app_users")];
+  let ret = fn(connection)
   PGOCaml.close(connection);
-  users
+  ret
 }

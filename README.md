@@ -9,6 +9,7 @@ This project shows a minimal fullstack
   BuckleScript toolchain
 - Shared business logic used by both of the above
 - GraphQL as a function leveraging ReWeb
+- Type safe Postgres powered by PGOCaml
 
 This is a proof-of-concept; you can customize it to your needs.
 
@@ -19,8 +20,11 @@ This is a proof-of-concept; you can customize it to your needs.
 
 Follow these steps:
 
+1. Install [Docker](http://docker.com/) (one-time setup)
 1. Install [NodeJS](https://nodejs.org/en/) (one-time setup)
 1. Install Esy (one-time setup): `npm install --global esy@latest`
+1. Boot up Postgres via Docker and keep it running in the background (necessary for PGOCaml)
+   a. `docker run -e POSTGRES_DB=reweb -p 6666:5432 -d --rm --name postgres postgres:latest`
 1. Set up the backend project: `esy install` (one-time setup but will
    take a while to compile dependencies like SSL so grab your favourite
    beverage)
