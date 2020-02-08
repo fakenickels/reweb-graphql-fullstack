@@ -1,33 +1,25 @@
 open Graphql_lwt;
+open Repository;
 
-type role =
-  | Admin
-  | User;
+type context = unit;
 
-type user = {
-  id: string,
-  name: string,
-  role,
-};
-
-/* let users = [ */
-/*   {id: "1", name: "Alice", role: Admin}, */
-/*   {id: "2", name: "Bob", role: User}, */
-/* ]; */
-
-let role: Schema.typ(unit, option(role)) =
+// We need to specify the type to inject the context type
+let role: Schema.typ(context, option(User.role)) =
   Schema.(
     enum(
       "role",
       ~doc="The role of a user",
       ~values=[
-        enum_value("USER", ~value=User),
-        enum_value("ADMIN", ~value=Admin),
+        enum_value("USER", ~value=User.User),
+        enum_value("ADMIN", ~value=User.Admin),
       ],
     )
   );
 
-let user =
+let user = {
+  // local scope and open so the compiler can pick up the User.t type for the fields
+  open User;
+
   Schema.(
     obj("user", ~doc="A user in the system", ~fields=_ =>
       [
@@ -49,6 +41,7 @@ let user =
       ]
     )
   );
+}
 
 let schema =
   Schema.(
@@ -59,17 +52,7 @@ let schema =
         ~typ=non_null(list(non_null(user))),
         ~args=Arg.[],
         ~resolve=(_info, ()) => {
-          let users = Repository.User.findAll();
-
-          users |> List.map(user => {
-            id: user#id,
-            name: user#full_name,
-            role: switch(user#role) {
-            | "ADMIN" => Admin
-            | "USER" => User
-            | _ => User
-            }
-          })
+          Repository.User.findAll();
         }
       ),
     ])
