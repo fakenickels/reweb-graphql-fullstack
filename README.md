@@ -1,4 +1,6 @@
-## Fullstack Reason Demo With GraphQL
+## Fullstack Reason Demo With GraphQL and Postgres
+
+# ⚠️ THIS IS VERY WIP STILL
 
 This project shows a minimal fullstack
 [ReasonML](https://reasonml.github.io/) application. It has a
