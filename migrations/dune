@@ -1,6 +1,5 @@
 (library
-  (name repository)
+  (name migrations)
   (flags (-w -40 -w +26))
-  (libraries lwt lwt.unix pgocaml_ppx)
+  (libraries lwt lwt.unix pgocaml_ppx repository)
   (preprocess (pps lwt_ppx pgocaml_ppx)))
-
